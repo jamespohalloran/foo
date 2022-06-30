@@ -110,6 +110,11 @@ export type QueryPostsConnectionArgs = {
   first?: InputMaybe<Scalars['Float']>;
   last?: InputMaybe<Scalars['Float']>;
   sort?: InputMaybe<Scalars['String']>;
+  filter?: InputMaybe<PostsFilter>;
+};
+
+export type DocumentFilter = {
+  posts?: InputMaybe<PostsFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -145,6 +150,7 @@ export type CollectionDocumentsArgs = {
   first?: InputMaybe<Scalars['Float']>;
   last?: InputMaybe<Scalars['Float']>;
   sort?: InputMaybe<Scalars['String']>;
+  filter?: InputMaybe<DocumentFilter>;
 };
 
 export type DocumentNode = Posts;
@@ -156,6 +162,27 @@ export type Posts = Node & Document & {
   id: Scalars['ID'];
   _sys: SystemInfo;
   _values: Scalars['JSON'];
+};
+
+export type StringFilter = {
+  startsWith?: InputMaybe<Scalars['String']>;
+  eq?: InputMaybe<Scalars['String']>;
+  exists?: InputMaybe<Scalars['Boolean']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type PostsBodyPageSectionFilter = {
+  heading?: InputMaybe<StringFilter>;
+  content?: InputMaybe<StringFilter>;
+};
+
+export type PostsBodyFilter = {
+  PageSection?: InputMaybe<PostsBodyPageSectionFilter>;
+};
+
+export type PostsFilter = {
+  title?: InputMaybe<StringFilter>;
+  body?: InputMaybe<PostsBodyFilter>;
 };
 
 export type PostsConnectionEdges = {
@@ -244,6 +271,7 @@ export type PostsConnectionQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Float']>;
   last?: InputMaybe<Scalars['Float']>;
   sort?: InputMaybe<Scalars['String']>;
+  filter?: InputMaybe<PostsFilter>;
 }>;
 
 
@@ -274,13 +302,14 @@ export const PostsDocument = gql`
 }
     ${PostsPartsFragmentDoc}`;
 export const PostsConnectionDocument = gql`
-    query postsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String) {
+    query postsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PostsFilter) {
   postsConnection(
     before: $before
     after: $after
     first: $first
     last: $last
     sort: $sort
+    filter: $filter
   ) {
     totalCount
     edges {

@@ -49,7 +49,11 @@ type Query {
   node(id: String): Node!
   document(collection: String, relativePath: String): DocumentNode!
   posts(relativePath: String): Posts!
-  postsConnection(before: String, after: String, first: Float, last: Float, sort: String): PostsConnection!
+  postsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PostsFilter): PostsConnection!
+}
+
+input DocumentFilter {
+  posts: PostsFilter
 }
 
 type DocumentConnectionEdges {
@@ -72,7 +76,7 @@ type Collection {
   matches: String
   templates: [JSON]
   fields: [JSON]
-  documents(before: String, after: String, first: Float, last: Float, sort: String): DocumentConnection!
+  documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter): DocumentConnection!
 }
 
 union DocumentNode = Posts
@@ -83,6 +87,27 @@ type Posts implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input StringFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input PostsBodyPageSectionFilter {
+  heading: StringFilter
+  content: StringFilter
+}
+
+input PostsBodyFilter {
+  PageSection: PostsBodyPageSectionFilter
+}
+
+input PostsFilter {
+  title: StringFilter
+  body: PostsBodyFilter
 }
 
 type PostsConnectionEdges {

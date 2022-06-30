@@ -60,9 +60,9 @@ const branch = "tina";
 // When working locally, hit our local filesystem.
 // On a Vercel deployment, hit the Tina Cloud API
 const apiURL =
-  process.env.NODE_ENV == "development"
+  process.env.NODE_ENV !== "development"
     ? "http://localhost:4001/graphql"
-    : `https://content.tinajs.io/content/f1de1adf-5eda-4fdd-998a-1b948d7fd872/github/${branch}`;
+    : `https://content.tinajs.io/content/8601195e-11b3-4859-9bd2-e6ae1fb7913b/github/${branch}`;
 
 export const tinaConfig = defineConfig({
   apiURL,
