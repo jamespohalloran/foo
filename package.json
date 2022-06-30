@@ -9,12 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@tinacms/cli": "^0.60.23",
+    "@tinacms/cli": "^0.0.0-2022530155136",
     "next": "12.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "styled-components": "^5.3.5",
-    "tinacms": "^0.68.9"
+    "tinacms": "^0.0.0-2022530155136"
   },
   "devDependencies": {
     "eslint": "8.17.0",
