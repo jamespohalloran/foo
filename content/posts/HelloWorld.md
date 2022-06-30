@@ -7,6 +7,8 @@ title: Vote For Pedro
 > To edit this site head over to the [`/admin`](/admin) route. Then click the pencil icon in the bottom lefthand corner to start editing 🦙.
 >
 > ![](/assets/golf.jpg)
+>
+> ![](/assets/golf.jpg "")
 
 # Dixi gaude Arethusa
 
